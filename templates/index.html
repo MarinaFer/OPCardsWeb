@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece Cards by Marina</title>
+    <link rel="stylesheet" href="/static/stylesHolo.css">
+    <link rel="stylesheet" href="/static/stylesGeneral.css">
+    <link rel="stylesheet" href="/static/stylesNavegacion.css">
+</head>
+
+<body>
+    <div class="bar"></div>
+
+    <nav class="main-menu">
+        <ul>
+            <li><a href="/op01"><img src="/static/images/MENU/01.png" class="menu-icon"><span class="nav-text">ROMANCE
+                        DAWN</span></a></li>
+            <li><a href="/op02"><img src="/static/images/MENU/02.png" class="menu-icon"><span class="nav-text">PARAMOUNT
+                        WAR</span></a></li>
+            <li><a href="/op03"><img src="/static/images/MENU/03.png" class="menu-icon"><span class="nav-text">PILLARS
+                        OF STRENGTH</span></a></li>
+            <li><a href="/op04"><img src="/static/images/MENU/04.png" class="menu-icon"><span class="nav-text">KINGDOMS
+                        OF INTRIGUE</span></a></li>
+            <li><a href="/op05"><img src="/static/images/MENU/05.png" class="menu-icon"><span class="nav-text">AWAKENING
+                        OF THE NEW ERA</span></a></li>
+            <li><a href="/op06"><img src="/static/images/MENU/06.png" class="menu-icon"><span class="nav-text">WINGS OF
+                        THE CAPTAIN</span></a></li>
+            <li><a href="/op07"><img src="/static/images/MENU/07.png" class="menu-icon"><span class="nav-text">500 YEARS
+                        IN THE FUTURE</span></a></li>
+            <li><a href="/op08"><img src="/static/images/MENU/08.png" class="menu-icon"><span class="nav-text">TWO
+                        LEGENDS</span></a></li>
+            <li><a href="/don"><img src="/static/images/MENU/BOLT.png" class="menu-icon bolt"><span
+                        class="nav-text">DON!!</span></a></li>
+            <li>
+                <a href="https://discordapp.com/users/164476285408641024" class="discord-link">
+                    <img src="/static/images/MENU/DISCORD.png" class="discord-icon" alt="Discord">
+                </a>
+            <li>
+                <a href="{{ logout_option.url }}" class="logout-link">
+                    <img src="/static/images/MENU/logout.png" class="menu-icon" alt="Logout">
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <h1>
+        <img src="{{ title_image }}"
+            class="title-image {% if option == 'don' %}tdon-image{% else %}{{ option }}-image{% endif %}">
+    </h1>
+
+    <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-info" id="progress-info">0/0</div>
+    </div>
+
+    <div class="container">
+        {% for start, end in [(0, 14), (14, 26), (26, 38), (38, 51), (51, 63), (63, 75), (75, 90), (90, 103), (103,
+        113), (113, 128), (128, 140), (140, 152), (152, 154)] %}
+        <div class="row">
+            {% for card in cards[start:end] %}
+            <div class="col-custom">
+                <div class="card-container">
+                    <img src="{{ card.url }}" class="card-img {% if card.blur %}blur{% endif %}"
+                        data-option="{{ card.option }}" data-index="{{ loop.index0 + start + 1 }}"
+                        data-count="{{ card.count }}" onclick="toggleBlur(this)" oncontextmenu="showCustomMenu(event)">
+                    <div class="card-counter"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="custom-menu">
+        <ul>
+            <li id="info-option">Información</li>
+            <li id="add-repeated">Añadir carta repetida</li>
+            <li id="remove-repeated">Eliminar carta repetida</li>
+        </ul>
+    </div>
+
+    <button id="back-to-top" class="noselect">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
+        </svg>
+    </button>
+
+    <div id="large-card-overlay" class="large-card-overlay" onclick="closeLargeCard()">
+        <div id="large-card-container" class="large-card-container">
+            <div class="cartaInformacion cartaInformacioncss">
+                <img id="large-card-img">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/scriptGeneral.js"></script>
+    <script src="/static/scriptMenuContextual.js"></script>
+</body>
+
+<footer class="footer">
+    <a href="https://en.onepiece-cardgame.com/" target="_blank">Página oficial</a>
+    <a href="https://tcgrepublic.com/category/subcategory_page_7322.html" target="_blank">Listado cartas japonesas</a>
+</footer>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url(http://weloveiconfonts.com/api/?family=entypo);
+        @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: rgba(255, 255, 255, 0.8);
+            margin-left: 12px;
+        }
+
+        body {
+            background: #272125;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+        }
+
+        form {
+            position: relative;
+            margin: 50px auto;
+            width: 380px;
+            height: auto;
+        }
+
+        input {
+            padding: 16px;
+            border-radius: 7px;
+            border: 0;
+            background: rgba(255, 255, 255, 0.2);
+            display: block;
+            margin: 15px;
+            width: 300px;
+            color: white;
+            font-size: 18px;
+            height: 54px;
+        }
+
+        input:focus {
+            outline-color: rgba(0, 0, 0, 0);
+            background: rgba(255, 255, 255, 0.95);
+            color: #e74c3c;
+        }
+
+        button {
+            float: right;
+            height: 121px;
+            width: 50px;
+            border: 0;
+            background: #e74c3c;
+            border-radius: 7px;
+            padding: 0;
+            color: white;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+
+        .inputUserIcon {
+            position: absolute;
+            top: 19px;
+            right: 83px;
+            color: white;
+        }
+
+        .inputPassIcon {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            color: white;
+        }
+
+        .user-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .pass-container {
+            position: relative;
+        }
+
+        input::-webkit-input-placeholder {
+            color: white;
+        }
+
+        input:focus::-webkit-input-placeholder {
+            color: #e74c3c;
+        }
+
+        .error-popup {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .register-link {
+            display: block;
+            text-align: left;
+            margin: 10px 15px;
+            color: #1abc9c;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .register-link:hover {
+            color: #16a085;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="login-form">
+        <h2><i class="fa fa-sign-in"></i> Entra a ver tus cartas</h2>
+        <button class="submit" type="submit">
+            <i class="fa fa-lock"></i>
+        </button>
+        <div class="user-container">
+            <input type="text" class="user" name="username" placeholder="Usuario" required />
+            <i class="fa fa-user inputUserIcon"></i>
+            <div class="error-popup" id="error-popup-user">Usuario incorrecto.</div>
+        </div>
+        <div class="pass-container">
+            <input type="password" class="pass" name="password" placeholder="Contraseña" required />
+            <i class="fa fa-key inputPassIcon"></i>
+            <div class="error-popup" id="error-popup-pass">Contraseña incorrecta.</div>
+        </div>
+        <a href="/register" class="register-link">Si no tienes cuenta habrá que crearla...</a>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Cambia el color del ícono cuando los campos están enfocados
+        $(".user").focusin(function () {
+            $(".inputUserIcon").css("color", "#e74c3c");
+        }).focusout(function () {
+            $(".inputUserIcon").css("color", "white");
+        });
+
+        $(".pass").focusin(function () {
+            $(".inputPassIcon").css("color", "#e74c3c");
+        }).focusout(function () {
+            $(".inputPassIcon").css("color", "white");
+        });
+
+        // Manejar el envío del formulario
+        $("#login-form").on("submit", function (e) {
+            e.preventDefault();
+
+            const username = $(".user").val();
+            const password = $(".pass").val();
+
+            $.ajax({
+                url: "/login",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ username, password }),
+                success: function (response) {
+                    window.location.href = "/";
+                },
+                error: function (jqXHR) {
+                    let errorMessage = "Error desconocido";
+                    if (jqXHR.status === 401) {
+                        errorMessage = "¿Quién dices que eres?";
+                    }
+                    $("#error-popup-user").text(errorMessage).fadeIn().delay(2000).fadeOut();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

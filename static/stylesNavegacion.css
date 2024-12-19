@@ -1,0 +1,229 @@
+/* Estilos base */
+.bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background-color: #212121;
+    z-index: 1000;
+}
+
+/* footer */
+.footer {
+    background-color: #212121;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.footer a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* botón de arriba */
+.noselect {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: #ff8800;
+    background-image: linear-gradient(315deg, #ff8800 0%, #b58ecc 74%);
+    border: none;
+    border-radius: 50%;
+    transition: 200ms;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    z-index: 1000;
+}
+
+button svg {
+    fill: white;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+button:hover {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    width: 55px;
+    height: 55px;
+}
+
+button:hover svg {
+    animation: bounce 2s infinite linear;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+
+    25% {
+        transform: translate(-50%, -65%);
+    }
+
+    50% {
+        transform: translate(-50%, -50%);
+    }
+
+    75% {
+        transform: translate(-50%, -35%);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* menú de navegación */
+.main-menu {
+    background: #212121;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    /* Añadimos flexbox */
+    flex-direction: column;
+    /* Apilamos elementos en columna */
+    justify-content: center;
+    /* Centra verticalmente */
+    align-items: center;
+    /* Centra horizontalmente los ítems */
+    overflow: hidden;
+    transition: width 0.05s linear;
+    z-index: 1000;
+}
+
+.main-menu:hover {
+    width: 250px;
+    overflow: visible;
+    height: 100%;
+    /* Mantiene la altura completa al hacer hover */
+}
+
+.main-menu:hover ul {
+    overflow-x: hidden;
+    max-height: calc(100vh - 374px);
+}
+
+.main-menu>ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    /* Asegura que las opciones ocupen el ancho completo del menú */
+}
+
+.main-menu li {
+    margin: 10px 0;
+    /* Espaciado uniforme entre las opciones */
+}
+
+.main-menu li>a {
+    display: flex;
+    color: #999;
+    margin-top: 13px;
+    text-decoration: none;
+    transition: all 0.1s linear;
+    padding-left: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.main-menu .menu-icon {
+    width: 0.6cm;
+    height: 0.6cm;
+    margin-right: 20px;
+}
+
+.main-menu .menu-icon.bolt {
+    height: 0.6cm;
+}
+
+.main-menu .discord-link {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+.main-menu .discord-link:hover {
+    background-color: transparent;
+}
+
+.main-menu .discord-icon {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.main-menu .nav-text {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    padding-right: 10px;
+    text-align: left;
+}
+
+nav ul,
+nav li {
+    outline: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu li:hover>a,
+nav.main-menu li.active>a {
+    color: #fff;
+    background-color: #000000;
+}
+
+.logout-link {
+    display: block;
+    width: 24px;
+    /* Tamaño del ícono */
+    height: 24px;
+    margin-top: 10px;
+    /* Espaciado si es necesario */
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    background-color: transparent;
+    /* Evita el efecto hover */
+}
+
+.menu-icon {
+    display: block;
+    width: 24px;
+    /* Tamaño del ícono */
+    height: 24px;
+    margin: 0 auto;
+    /* Centra el ícono horizontalmente */
+}
+
+/* Excluir hover para Discord y Logout */
+.main-menu li a:hover:not(.discord-link):not(.logout-link) {
+    background-color: #000;
+    /* Solo aplica a otras opciones */
+}

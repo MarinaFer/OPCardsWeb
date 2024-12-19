@@ -1,0 +1,135 @@
+/* css de estilos generales */
+
+body {
+    background-color: #282c34;
+    color: white;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Menú contextual*/
+#custom-menu {
+    position: absolute;
+    background-color: #212121;
+    color: white;
+    border-radius: 4px;
+    padding: 8px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+    text-align: left;
+    font-family: sans-serif;
+}
+
+#custom-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#custom-menu ul li {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#custom-menu ul li:hover {
+    background-color: #555;
+}
+
+
+/* Barra de progreso */
+.progress-wrap {
+    background: rgb(105, 103, 100);
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    width: 30%;
+    height: 20px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+}
+
+.progress-bar {
+    background: -webkit-linear-gradient(90deg, #ebe5c1, #ff8800);
+    background: linear-gradient(90deg, #ebe5c1, #ff8800);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    border-radius: 10px;
+}
+
+.progress-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: sans-serif;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+}
+
+.progress-wrap:hover .progress-info {
+    opacity: 1;
+}
+
+
+/* Títulos */
+.title-image {
+    display: block;
+    margin: 0 auto;
+}
+
+.op01-image {
+    width: 800px;
+    position: relative;
+}
+
+.op02-image {
+    width: 800px;
+    position: relative;
+}
+
+.op03-image {
+    width: 800px;
+    position: relative;
+}
+
+.op04-image {
+    width: 800px;
+    position: relative;
+}
+
+.op05-image {
+    width: 800px;
+    position: relative;
+}
+
+.op06-image {
+    width: 800px;
+    position: relative;
+}
+
+.op07-image {
+    width: 800px;
+    position: relative;
+}
+
+.op08-image {
+    width: 800px;
+    position: relative;
+}
+
+.tdon-image {
+    width: 300px;
+    position: relative;
+}
+
