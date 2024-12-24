@@ -70,14 +70,30 @@ function showCustomMenu(event) {
 function updateCardCounter(image) {
     var index = image.getAttribute('data-index');
     var option = image.getAttribute('data-option');
-    var counterElement = image.parentElement.querySelector('.card-counter');
+    var container = image.closest('.card-container');
+
+    // Aseguramos que el contenedor tenga posición relativa
+    container.style.position = 'relative';
+
+    var counterElement = container.querySelector('.card-counter');
+
     if (!counterElement) {
         counterElement = document.createElement('div');
         counterElement.classList.add('card-counter');
-        image.parentElement.appendChild(counterElement);
+        counterElement.style.position = 'absolute';
+        counterElement.style.top = '5px';
+        counterElement.style.right = '5px';
+        counterElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        counterElement.style.color = 'white';
+        counterElement.style.padding = '4px 8px';
+        counterElement.style.borderRadius = '4px';
+        counterElement.style.fontSize = '14px';
+        counterElement.style.pointerEvents = 'none';
+        container.appendChild(counterElement);
     }
+
     var count = cardState[option][index] || 0;
-    if (count > 0 && !image.classList.contains('blur')) {
+    if (count > 0) {
         counterElement.textContent = '+' + count;
         counterElement.style.display = 'block';
     } else {
@@ -103,6 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('add-repeated').addEventListener('click', function () {
         var index = customMenu.getAttribute('data-index');
         var option = customMenu.getAttribute('data-option');
+        if (!cardState[option]) {
+            cardState[option] = {};
+        }
         if (!cardState[option][index]) {
             cardState[option][index] = 1;
         } else {
@@ -122,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('remove-repeated').addEventListener('click', function () {
         var index = customMenu.getAttribute('data-index');
         var option = customMenu.getAttribute('data-option');
-        if (cardState[option][index] && cardState[option][index] > 0) {
+        if (cardState[option] && cardState[option][index] && cardState[option][index] > 0) {
             cardState[option][index]--;
         }
         customMenu.style.display = 'none';
