@@ -38,7 +38,7 @@ button {
     height: 50px;
     cursor: pointer;
     background-color: #ff8800;
-    background-image: linear-gradient(315deg, #ff8800 0%, #b58ecc 74%);
+    background-image: linear-gradient(315deg, #E30C0C 22%, #2662E6 74%);
     border: none;
     border-radius: 50%;
     transition: 200ms;
