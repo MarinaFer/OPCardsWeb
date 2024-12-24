@@ -93,7 +93,7 @@ function updateCardCounter(image) {
     }
 
     var count = cardState[option][index] || 0;
-    if (count > 0) {
+    if (count > 0 && !image.classList.contains('blur')) {
         counterElement.textContent = '+' + count;
         counterElement.style.display = 'block';
     } else {
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('add-repeated').addEventListener('click', function () {
         var index = customMenu.getAttribute('data-index');
         var option = customMenu.getAttribute('data-option');
+        var image = document.querySelector(`.card-img[data-index="${index}"]`);
         if (!cardState[option]) {
             cardState[option] = {};
         }
@@ -128,10 +129,12 @@ document.addEventListener('DOMContentLoaded', function () {
             cardState[option][index]++;
         }
         customMenu.style.display = 'none';
-        updateCardCounter(document.querySelector(`.card-img[data-index="${index}"]`));
+        if (!image.classList.contains('blur')) {
+            updateCardCounter(image);
+        }
         saveCardState({
             index: index,
-            blur: document.querySelector(`.card-img[data-index="${index}"]`).classList.contains('blur'),
+            blur: image.classList.contains('blur'),
             count: cardState[option][index],
             option: option
         });
@@ -141,14 +144,17 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('remove-repeated').addEventListener('click', function () {
         var index = customMenu.getAttribute('data-index');
         var option = customMenu.getAttribute('data-option');
+        var image = document.querySelector(`.card-img[data-index="${index}"]`);
         if (cardState[option] && cardState[option][index] && cardState[option][index] > 0) {
             cardState[option][index]--;
         }
         customMenu.style.display = 'none';
-        updateCardCounter(document.querySelector(`.card-img[data-index="${index}"]`));
+        if (!image.classList.contains('blur')) {
+            updateCardCounter(image);
+        }
         saveCardState({
             index: index,
-            blur: document.querySelector(`.card-img[data-index="${index}"]`).classList.contains('blur'),
+            blur: image.classList.contains('blur'),
             count: cardState[option][index],
             option: option
         });
